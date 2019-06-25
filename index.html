@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html ng-app="meuModuloMain">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +8,25 @@
     <link rel="stylesheet" href="css/materialize/materialize.min.css">
 </head>
 
-<body>
+<body ng-controller="indexController">
     <header class="container">
         <h2 ng-bind="titulo"></h2>
     </header>
 
     <main class="container">
+
         <div class="row">
             <input type="text" placeholder="Busca">
-
         </div>
+
         <table class="striped">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>E-mail</th>
-                    <th>Nota1</th>
-                    <th>Nota2</th>
-                    <th>Nota3</th>
+                    <th>Nota 1</th>
+                    <th>Nota 2</th>
+                    <th>Nota 3</th>
                     <th>Média</th>
                 </tr>
             </thead>
@@ -41,6 +41,7 @@
                 </tr>
             </tbody>
         </table>
+
     </main>
 
 
@@ -54,12 +55,18 @@
 
     <!--Angular JS-->
     <script type="text/javascript">
+    angular.module("meuModuloMain", [])
+        .controller("indexController", function($scope){
 
+            $scope.titulo = "Sistema com Angular JS 1.7.8";
+
+
+
+        });
 
 
 
     </script>
 
 </body>
-
 </html>
