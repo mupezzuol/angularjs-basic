@@ -38,7 +38,7 @@
                     <td>{{aluno.nota1}}</td>
                     <td>{{aluno.nota2}}</td>
                     <td>{{aluno.nota3}}</td>
-                    <td>{{ media(aluno) }}</td>
+                    <td>{{aluno.media}}</td>
                 </tr>
             </tbody>
         </table>
@@ -68,11 +68,21 @@
                 {nome: "Raul Pezzuol", email: "raul@gmail.com", nota1: 3, nota2: 3, nota3: 10}
             ];
 
-            $scope.media = function(aluno){
-                console.log("Calculando Média do aluno: "+aluno.nome);
+            var initMedia = function(){
+                $scope.alunos.forEach(function(aluno){
+                    //Para cada aluno eu crio uma nova propriedade 'media' que recebe o retorno da função que calcula media
+                    aluno.media = calcularMedia(aluno);
+                });
+            }
+
+            var calcularMedia = function(aluno){
+                console.log("Calculando Média do Aluno: "+aluno.nome);
                 return ((aluno.nota1 + aluno.nota2 + aluno.nota3) /3).toFixed(2);
             }
 
+
+            //Inicializa o calculo da média para melhorar performace
+            initMedia();
 
         });
 
