@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="aluno in alunos">
                     <td>{{aluno.nome}}</td>
                     <td>{{aluno.email}}</td>
                     <td>{{aluno.nota1}}</td>
@@ -43,9 +43,6 @@
         </table>
 
     </main>
-
-
-
 
 
     <!--Importações-->
@@ -61,10 +58,16 @@
             $scope.titulo = "Sistema com Angular JS 1.7.8";
 
 
+            $scope.alunos = [
+                {nome: "Murillo Pezzuol", email: "murillo@gmail.com", nota1: 10, nota2: 10, nota3: 9.5},
+                {nome: "Gaybriel Hideki", email: "gaybriel@outlook.com", nota1: 7, nota2: 5, nota3: 10},
+                {nome: "Egon Sintoatras", email: "egon@hotmail.com", nota1: 8, nota2: 5, nota3: 9},
+                {nome: "Tiago Master", email: "tiago@bol.com", nota1: 8, nota2: 7, nota3: 4},
+                {nome: "Raul Pezzuol", email: "raul@gmail.com", nota1: 3, nota2: 3, nota3: 10}
+            ];
+
 
         });
-
-
 
     </script>
 
