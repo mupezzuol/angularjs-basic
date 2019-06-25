@@ -16,7 +16,8 @@
     <main class="container">
 
         <div class="row">
-            <input type="text" placeholder="Busca">
+            <input type="text" ng-model="busca" placeholder="Busca">
+            <!--Posso buscar de acordo com o atributo do objeto: busca.nome, busca.nota1, busca.email etc....-->
         </div>
 
         <table class="striped">
@@ -31,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="aluno in alunos">
+                <tr ng-repeat="aluno in alunos | filter:busca">
                     <td>{{aluno.nome}}</td>
                     <td>{{aluno.email}}</td>
                     <td>{{aluno.nota1}}</td>
@@ -57,6 +58,7 @@
 
             $scope.titulo = "Sistema com Angular JS 1.7.8";
 
+            
 
             $scope.alunos = [
                 {nome: "Murillo Pezzuol", email: "murillo@gmail.com", nota1: 10, nota2: 10, nota3: 9.5},
