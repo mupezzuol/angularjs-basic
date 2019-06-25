@@ -66,6 +66,11 @@
                 {nome: "Raul Pezzuol", email: "raul@gmail.com", nota1: 3, nota2: 3, nota3: 10}
             ];
 
+            $scope.media = function(aluno){
+                console.log("Calculando Média do aluno: "+aluno.nome);
+                return ((aluno.nota1 + aluno.nota2 + aluno.nota3) /3).toFixed(2);
+            }
+
 
         });
 
