@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Angular JS</title>
-    <link rel="stylesheet" href="css/materialize/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 </head>
 
 <body ng-controller="indexController">
     <header class="container">
-        <h2 ng-bind="titulo"></h2>
+        <div class="row">
+            <h2 ng-bind="titulo"></h2>
+        </div>
     </header>
 
     <main class="container">
@@ -21,38 +23,40 @@
             <!--Posso buscar de acordo com o atributo do objeto: busca.nome, busca.nota1, busca.email etc....-->
         </div>
 
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Nota 1</th>
-                    <th>Nota 2</th>
-                    <th>Nota 3</th>
-                    <th>Média</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="aluno in alunos | filter:busca">
-                    <td>{{aluno.nome}}</td>
-                    <td>{{aluno.email}}</td>
-                    <td>{{aluno.nota1}}</td>
-                    <td>{{aluno.nota2}}</td>
-                    <td>{{aluno.nota3}}</td>
-                    <td>{{aluno.media}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Nota 1</th>
+                        <th>Nota 2</th>
+                        <th>Nota 3</th>
+                        <th>Média</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="aluno in alunos | filter:busca">
+                        <td>{{aluno.nome}}</td>
+                        <td>{{aluno.email}}</td>
+                        <td>{{aluno.nota1}}</td>
+                        <td>{{aluno.nota2}}</td>
+                        <td>{{aluno.nota3}}</td>
+                        <td>{{aluno.media}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div class="row">
             <!-- Modal Adicionar -->
-            <a class="waves-effect waves-light btn-small modal-trigger orange" href="#adicionar">Adicionar</a>
+            <a class="modal-trigger waves-effect waves-light btn" href="#modalAdicionar">Adicionar</a>
         </div>
 
     </main>
 
     <!-- Modal Adicionar - Structure -->
-    <div id="adicionar" class="modal">
+    <div id="modalAdicionar" class="modal">
         <div class="modal-content">
             <h4>Adicionar Aluno</h4>
             <p>Prencha os dados do Aluno</p>
@@ -91,8 +95,8 @@
         </div>
 
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect btn-flat">Cancelar</a>
-            <a ng-click="addAluno(Aluno)" class="waves-effect waves-light btn-small blue">Adicionar</a>
+            <a ng-click="addAluno(Aluno)" class="waves-effect waves-light btn blue">Adicionar</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
         </div>
     </div>
     <!--FIM Modal Adicionar-->
@@ -100,16 +104,14 @@
 
     <!--Importações-->
     <script type="text/javascript" src="lib/jquery3-4-1.min.js"></script>
-    <script src="lib/materialize/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src="lib/angularjs/angular.min.js"></script>
 
     <!--Inicializando Modais Materialize/JQuery-->
     <script type="text/javascript">
-
         $(document).ready(function () {
-            $('.modal').modal();
+            $('.modal-trigger').leanModal();
         });
-
     </script>
 
 
@@ -120,8 +122,6 @@
 
                 $scope.titulo = "Sistema com Angular JS 1.7.8";
 
-
-
                 $scope.alunos = [
                     { nome: "Murillo Pezzuol", email: "murillo@gmail.com", nota1: 10, nota2: 10, nota3: 9.5 },
                     { nome: "Gaybriel Hideki", email: "gaybriel@outlook.com", nota1: 7, nota2: 5, nota3: 10 },
@@ -130,11 +130,12 @@
                     { nome: "Raul Pezzuol", email: "raul@gmail.com", nota1: 3, nota2: 3, nota3: 10 }
                 ];
 
-                var initMedia = function () {
+                var init = function () {
                     $scope.alunos.forEach(function (aluno) {
                         //Para cada aluno eu crio uma nova propriedade 'media' que recebe o retorno da função que calcula media
                         aluno.media = calcularMedia(aluno);
                     });
+                    limpaForm();
                 }
 
                 var calcularMedia = function (aluno) {
@@ -147,12 +148,16 @@
                 $scope.addAluno = function(aluno){
                    aluno.media = calcularMedia(aluno);//Adc atributo média no objeto
                    $scope.alunos.push(aluno)//adc Aluno novo na lista de Alunos
-                   //$('.modal').clone(true);//Fechando a Modal
-                   $scope.Aluno = { nome: "", email: "", nota1: '', nota2: '', nota3: '' };//Limpando formulário. Aluno do $scope
+                   $('#modalAdicionar').closeModal();//Fechando a Modal
+                   limpaForm();
                 };
 
-                //Inicializa o calculo da média para melhorar performace
-                initMedia();
+                var limpaForm = function(){
+                    $scope.Aluno = { nome: "", email: "", nota1: '', nota2: '', nota3: '' };//Limpando formulário. Aluno do $scope
+                };
+
+                //Inicializa algumas configs (calcula média, limpa form etc...)
+                init();
 
             });
 
