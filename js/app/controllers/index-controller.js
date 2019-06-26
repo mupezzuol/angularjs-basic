@@ -1,7 +1,7 @@
 angular.module("meuModuloMain")
     .controller("indexController", function ($scope) {
 
-        $scope.titulo = "Sistema com Angular JS 1.7.8";
+        $scope.titulo = "Home";
         $scope.editando = false;
 
 
